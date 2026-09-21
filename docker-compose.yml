@@ -1,0 +1,36 @@
+services:
+
+  frontend:
+    image: mohiteswapnil01/my-frontend-v1.1:latest
+    container_name: nginx-frontend
+    ports:
+      - "8080:80"
+    networks:
+      - frontend-net
+
+  backend:
+    image: mohiteswapnil01/my-backend-v1.1:latest
+    container_name: node-backend
+    networks:
+      - frontend-net
+      - backend-net
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: mydb
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: qwerty
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - backend-net
+
+networks:
+  frontend-net:
+  backend-net:
+
+volumes:
+  mysql-data:
