@@ -11,7 +11,7 @@ const db = mysql.createPool({
     host: "mysql-db",
     user: "root",
     password: "root123",
-    database: "appdb",
+    database: "mydb",
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0

@@ -1,6 +1,6 @@
-CREATE DATABASE IF NOT EXISTS appdb;
+CREATE DATABASE IF NOT EXISTS mydb;
 
-USE appdb;
+USE mydb;
 
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS users (
     email VARCHAR(100) NOT NULL
 );
 
-INSERT INTO users (name, email)
-VALUES
-('Swapnil', 'swapnil@example.com'),
-('Rahul', 'rahul@example.com');
+#INSERT INTO users (name, email)
+#VALUES
+#('Swapnil', 'swapnil@example.com'),
+#('Rahul', 'rahul@example.com');
