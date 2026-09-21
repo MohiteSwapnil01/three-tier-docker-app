@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Docker 3 Tier Application</title>
+</head>
+
+<body>
+
+<h1>Docker 3 Tier Application</h1>
+
+<h2>Add User</h2>
+
+<form id="userForm">
+
+    <input
+        type="text"
+        id="name"
+        placeholder="Enter name"
+        required
+    >
+
+    <input
+        type="email"
+        id="email"
+        placeholder="Enter email"
+        required
+    >
+
+    <button type="submit">Add User</button>
+
+</form>
+
+<h2>Users</h2>
+
+<button onclick="getUsers()">Get Users</button>
+
+<ul id="users"></ul>
+
+<script>
+
+const API = "/api";
+
+document.getElementById("userForm").addEventListener("submit", async function(e) {
+
+    e.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+
+    const response = await fetch(`${API}/addUser`, {
+
+        method: "POST",
+
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+            name: name,
+            email: email
+        })
+
+    });
+
+    const data = await response.json();
+
+    alert(data.message || data.error);
+
+});
+
+async function getUsers() {
+
+    const response = await fetch(`${API}/getUsers`);
+
+    const users = await response.json();
+
+    const list = document.getElementById("users");
+
+    list.innerHTML = "";
+
+    users.forEach(user => {
+
+        const li = document.createElement("li");
+
+        li.innerHTML =
+            `${user.id} - ${user.name} - ${user.email}`;
+
+        list.appendChild(li);
+
+    });
+
+}
+
+</script>
+
+</body>
+</html>
